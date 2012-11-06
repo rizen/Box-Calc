@@ -1,4 +1,8 @@
-version 0.0500 - October 27, 2012
+version 0.0501 - Novemver 6, 2012
+ * Fix some cosmetic problems.
+ * Added some parameter validation for the shipping_options method.
+
+version 0.0500 - November 6, 2012
  * NOT backwards compatible.
  * Now works asynchronously.
  * Add SSL to web service.

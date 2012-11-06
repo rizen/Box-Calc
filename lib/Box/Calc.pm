@@ -116,6 +116,11 @@ has items => (
     }
 );
 
+has implementation => (
+    is  => 'rw',
+    default => 'perl',
+);
+
 =head2 add_item(quantity, params)
 
 Registers a new item. Returns the new item registered.
@@ -158,7 +163,7 @@ Returns a data structure with all the item names and quantities packed into boxe
 
 sub packing_list {
     my $self = shift;
-    my $payload = {api_key => $self->api_key};
+    my $payload = {api_key => $self->api_key, implementation => $self->implementation};
     foreach my $type (@{$self->box_types}) {
         push @{$payload->{box_types}}, {
             weight      => $type->weight,
@@ -234,7 +239,9 @@ A 5 digit zip code (if shipping inside the United States)  or the name of a coun
 
 sub shipping_options {
     my ($self, %params) = @_;
-    my $payload = {api_key => $self->api_key, to => $params{to}, from => $params{from}};
+    ouch('bad param', '"from" must be a 5 digit zip code.', 'from') unless $params{from} =~ m/^\d{5}$/xms;
+    ouch('bad param', '"to" must be a 5 digit zip code or a country name.', 'to') unless ($params{to} =~ m/^\d{5}$/xms || length($params{to}) > 5);
+    my $payload = {api_key => $self->api_key, implementation => $self->implementation, to => $params{to}, from => $params{from}};
     foreach my $type (@{$self->box_types}) {
         push @{$payload->{box_types}}, {
             weight      => $type->weight,
