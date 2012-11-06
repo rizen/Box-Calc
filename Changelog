@@ -1,27 +1,8 @@
+version 0.0500 - October 27, 2012
+ * NOT backwards compatible.
+ * Now works asynchronously.
+ * Add SSL to web service.
+ * Add shipping_options method which returns USPS postage rate calculations.
+
 version 0.0400 - October 25, 2012
- * Now an interface to the Box Calc web service.
-
-version 0.0301 - October 18, 2012
- * Optimizations adding up to over 500% faster performance.
-
-version 0.0300 - October 18, 2012
- * Removed extraneous file.
- * Renamed packing_list to packing_instructions
- * Added new packing_list function that produces a more useful, smaller, and faster dataset.
- * Added category filtering of box types.
-
-version 0.0201 - October 14, 2012
- * Decided not to keep it as a public module for now.
- * Add max item size to "no box fits" exception.
- * Sorting for max item sizes was backwards.
-
-version 0.0200 - October 11, 2012
- * Add the weight of each box to the packing_list output. 
-
-version 0.0101 - October 10, 2012 (10 minutes later)
- * Remove test diags and replace them with notes.
- * Added a description of how the algorithm works.
-
-version 0.0100 - October 10, 2012
-
- * Initial release.
+ * First public release to web service.

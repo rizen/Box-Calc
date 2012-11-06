@@ -5,8 +5,9 @@ use Moose;
 use Box::Calc::BoxType;
 use Box::Calc::Item;
 use Ouch;
-use LWP::UserAgent;
 use JSON qw(to_json from_json);
+use AnyEvent::HTTP::LWP::UserAgent;
+use AnyEvent;
 
 =head1 NAME
 
@@ -27,8 +28,14 @@ Box::Calc - Packing Algorithm
  $box_calc->add_item( 1,  { x => 3.3, y => 3, z => 4, weight => 4.5, name => 'apple' });
  $box_calc->add_item( 2,  { x => 8, y => 2.5, z => 2.5, weight => 14, name => 'water bottle' });
 
- # get a packing list
- my $packing_list = $box_calc->packing_list;
+ # get a packing list synchronously
+ my $packing_list = $box_calc->packing_list->recv;
+
+ # get a packing list asynchronously 
+ my $cv = $box_calc->packing_list;
+ # ... do stuff ...
+ my $packing_list = $cv->recv;
+
   
 =head1 DESCRIPTION
 
@@ -136,6 +143,7 @@ Returns a data structure with all the item names and quantities packed into boxe
 
  [
     {                                   # box one
+        id              => "xxx",
         name            => "big box",
         weight          => 30.1,
         packing_list    => {
@@ -150,7 +158,7 @@ Returns a data structure with all the item names and quantities packed into boxe
 
 sub packing_list {
     my $self = shift;
-    my $payload = {};
+    my $payload = {api_key => $self->api_key};
     foreach my $type (@{$self->box_types}) {
         push @{$payload->{box_types}}, {
             weight      => $type->weight,
@@ -158,7 +166,6 @@ sub packing_list {
             y           => $type->y,
             z           => $type->z,
             name        => $type->name,
-            categories  => $type->categories,
         };
     }
     foreach my $item (@{$self->items}) {
@@ -173,8 +180,90 @@ sub packing_list {
             },
         };
     }
-    return $self->_call('packing_list', [$self->api_key, $payload]);
+    return $self->_call('packing_list', [$payload]);
 }
+
+=head2 shipping_options( params )
+
+Returns a data structure with all the item names and quantities packed into boxes, and all the shipping methods and prices. This can be used to provide shipping pricing options.
+
+ {
+     'USPS Parcel Post' => {
+         postage            => 11.12,
+         number_of_parcels  => 1,
+         weight             => 30.1,
+         parcels            => [
+            {                                   # box one
+                id              => "xxx",
+                name            => "big box",
+                weight          => 30.1,
+                packing_list    => {
+                    "soda"          => 3,
+                    "apple"         => 1,
+                    "water bottle"  => 2,
+                },
+                shipping        => {
+                    postage     => 11.12,
+                }
+            }
+        ]
+    }
+ }
+
+=over
+
+=item params
+
+A hash of parameters that affect the results returned.
+
+=over
+
+=item from
+
+A 5 digit zip code where the packages will originate from.
+
+=item to
+
+A 5 digit zip code (if shipping inside the United States)  or the name of a country (if shipping outside the United States).
+
+=back
+
+=back
+
+=cut
+
+sub shipping_options {
+    my ($self, %params) = @_;
+    my $payload = {api_key => $self->api_key, to => $params{to}, from => $params{from}};
+    foreach my $type (@{$self->box_types}) {
+        push @{$payload->{box_types}}, {
+            weight      => $type->weight,
+            x           => $type->x,
+            y           => $type->y,
+            z           => $type->z,
+            name        => $type->name,
+            compatible_services  => $type->compatible_services,
+        };
+    }
+    foreach my $item (@{$self->items}) {
+        push @{$payload->{items}}, {
+            quantity    => $item->quantity,
+            item        => {
+                weight      => $item->weight,
+                x           => $item->x,
+                y           => $item->y,
+                z           => $item->z,
+                name        => $item->name,
+            },
+        };
+    }
+    return $self->_call('shipping_options', [$payload]);
+}
+
+has _uri => (
+    is          => 'rw',
+    default     => 'https://api.boxcalc.net/rpc',
+);
 
 sub _call {
     my ($self, $method, $params) = @_;
@@ -184,29 +273,33 @@ sub _call {
         method      => $method,
         params      => $params,
     };  
-    my $ua = LWP::UserAgent->new; 
+    my $ua = AnyEvent::HTTP::LWP::UserAgent->new;
     $ua->timeout(30);
-    my $response = $ua->post('http://api.boxcalc.net/rpc', 
+    my $cv = AnyEvent->condvar;
+    $ua->post_async($self->_uri, 
         Content_Type    => 'application/json', 
         Content         => to_json($payload), 
-        Accept          => 'application/json',
-    );
-    my $content = $response->decoded_content;
-    my $hash = eval{from_json($content)};
-    if ($@) {
-        ouch 500, 'Unable to parse response.', $content;
-    }
-    if (exists $hash->{error}) {
-        ouch $hash->{error}{code}, $hash->{error}{message}, $hash->{error}{data};
-    }
-    return $hash->{result};
+        Accept          => 'application/json')->cb(sub {
+            my $response = shift->recv;
+            my $content = $response->decoded_content;
+            my $hash = eval{from_json($content)};
+            if ($@) {
+                ouch 500, 'Unable to parse response.', $content;
+            }
+            if (exists $hash->{error}) {
+                ouch $hash->{error}{code}, $hash->{error}{message}, $hash->{error}{data};
+            }
+            $cv->send($hash->{result});
+        });
+    return $cv;
 }
 
 =head1 PREREQS
 
 L<Moose>
 L<Ouch>
-L<LWP::UserAgent>
+L<AnyEvent>
+L<AnyEvent::HTTP::LWP::UserAgent>
 L<JSON>
 
 =head1 SUPPORT
