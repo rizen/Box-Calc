@@ -47,7 +47,7 @@ sub fill_x {
     foreach my $row (@{$self->rows}) {
         $value = $row->fill_x if $row->fill_x > $value;
     }
-    return $value;
+    return sprintf ("%.4f", $value);
 }
 
 =head2 fill_y()
@@ -77,7 +77,7 @@ sub fill_z {
     foreach my $row (@{$self->rows}) {
         $value = $row->fill_z if $row->fill_z > $value;
     }
-    return $value;
+    return sprintf ("%.4f", $value);
 }
 
 =head2 max_x()

@@ -45,23 +45,23 @@ cmp_deeply
         [
           {
             'calculated_weight' => '14.8',
-            'fill_z' => 2,
+            'fill_z' => '2.0000',
             'volume' => 8,
             'used_volume' => '7',
             'name' => '8 cube',
             'x' => 2,
             'y' => 2,
-            'fill_y' => 2,
+            'fill_y' => '2.0000',
             'weight' => 6,
-            'fill_x' => 2,
+            'fill_x' => '2.0000',
             'id' => ignore(),
             'z' => 2,
             'layers' => [
                           {
                             'calculated_weight' => 4,
-                            'fill_z' => 1,
-                            'fill_y' => 2,
-                            'fill_x' => 2,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '2.0000',
+                            'fill_x' => '2.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 2,
@@ -111,9 +111,9 @@ cmp_deeply
                           },
                           {
                             'calculated_weight' => 3,
-                            'fill_z' => 1,
-                            'fill_y' => 2,
-                            'fill_x' => 2,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '2.0000',
+                            'fill_x' => '2.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 2,
@@ -177,23 +177,23 @@ cmp_deeply
     [
           {
             'calculated_weight' => '25.7',
-            'fill_z' => 2,
+            'fill_z' => '2.0000',
             'volume' => 27,
             'used_volume' => '14',
             'name' => '27 cube',
             'x' => 3,
             'y' => 3,
-            'fill_y' => 3,
+            'fill_y' => '3.0000',
             'weight' => 9,
-            'fill_x' => 3,
+            'fill_x' => '3.0000',
             'id' => ignore(),
             'z' => 3,
             'layers' => [
                           {
                             'calculated_weight' => 9,
-                            'fill_z' => 1,
-                            'fill_y' => 3,
-                            'fill_x' => 3,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '3.0000',
+                            'fill_x' => '3.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 3,
@@ -286,9 +286,9 @@ cmp_deeply
                           },
                           {
                             'calculated_weight' => 5,
-                            'fill_z' => 1,
-                            'fill_y' => 2,
-                            'fill_x' => 3,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '2.0000',
+                            'fill_x' => '3.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 3,
@@ -367,23 +367,23 @@ cmp_deeply
     [
           {
             'calculated_weight' => '38.7',
-            'fill_z' => 3,
+            'fill_z' => '3.0000',
             'volume' => 27,
             'used_volume' => '27',
             'name' => '27 cube',
             'x' => 3,
             'y' => 3,
-            'fill_y' => 3,
+            'fill_y' => '3.0000',
             'weight' => 9,
-            'fill_x' => 3,
+            'fill_x' => '3.0000',
             'id' => ignore(),
             'z' => 3,
             'layers' => [
                           {
                             'calculated_weight' => 9,
-                            'fill_z' => 1,
-                            'fill_y' => 3,
-                            'fill_x' => 3,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '3.0000',
+                            'fill_x' => '3.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 3,
@@ -476,9 +476,9 @@ cmp_deeply
                           },
                           {
                             'calculated_weight' => 9,
-                            'fill_z' => 1,
-                            'fill_y' => 3,
-                            'fill_x' => 3,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '3.0000',
+                            'fill_x' => '3.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 3,
@@ -571,9 +571,9 @@ cmp_deeply
                           },
                           {
                             'calculated_weight' => 9,
-                            'fill_z' => 1,
-                            'fill_y' => 3,
-                            'fill_x' => 3,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '3.0000',
+                            'fill_x' => '3.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 3,
@@ -668,23 +668,23 @@ cmp_deeply
           },
           {
             'calculated_weight' => '12.7',
-            'fill_z' => 1,
+            'fill_z' => '1.0000',
             'volume' => 27,
             'used_volume' => '1',
             'name' => '27 cube',
             'x' => 3,
             'y' => 3,
-            'fill_y' => 1,
+            'fill_y' => '1.0000',
             'weight' => 9,
-            'fill_x' => 1,
+            'fill_x' => '1.0000',
             'id' => ignore(),
             'z' => 3,
             'layers' => [
                           {
                             'calculated_weight' => 1,
-                            'fill_z' => 1,
-                            'fill_y' => 1,
-                            'fill_x' => 1,
+                            'fill_z' => '1.0000',
+                            'fill_y' => '1.0000',
+                            'fill_x' => '1.0000',
                             'rows' => [
                                         {
                                           'calculated_weight' => 1,

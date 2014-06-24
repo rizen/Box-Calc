@@ -20,9 +20,9 @@ isa_ok $box, 'Box::Calc::Box';
 is $box->x, 12, 'x defaults to largest';
 is $box->y, 12, 'y defaults to 12';
 is $box->z, 12, 'z defaults to smallest';
-is $box->fill_x, 0, 'fill_x 0';
-is $box->fill_y, 0, 'fill_y 0';
-is $box->fill_z, 0, 'fill_z 0';
+is $box->fill_x, '0.0000', 'fill_x 0';
+is $box->fill_y, '0.0000', 'fill_y 0';
+is $box->fill_z, '0.0000', 'fill_z 0';
 is $box->name, 'test', 'overriding the default name';
 is $box->calculate_weight, 26, 'taking box weight and void filler weight into account in weight calculations';
 
@@ -32,23 +32,23 @@ cmp_deeply $box->outer_dimensions, [12,12,12], 'outer dimensions same as inner d
 is $box->count_layers, 1, 'A new box has a layer created automatically';
 cmp_deeply $box->packing_instructions, {
           'calculated_weight' => 26,
-          'fill_z' => 0,
+          'fill_z' => '0.0000',
           'volume' => 1728,
           'used_volume' => '0',
           'name' => 'test',
           'x' => 12,
           'y' => 12,
-          'fill_y' => 0,
+          'fill_y' => '0.0000',
           'weight' => 20,
-          'fill_x' => 0,
+          'fill_x' => '0.0000',
           'id' => ignore(),
           'z' => 12,
           'layers' => [
                         {
                           'calculated_weight' => 0,
-                          'fill_z' => 0,
-                          'fill_y' => 0,
-                          'fill_x' => 0,
+                          'fill_z' => '0.0000',
+                          'fill_y' => '0.0000',
+                          'fill_x' => '0.0000',
                           'rows' => [
                                       {
                                         'calculated_weight' => 0,
@@ -81,29 +81,29 @@ $box->pack_item($tarot_deck);
 is $box->count_layers, 1, 'Still on one layer';
 cmp_deeply $box->packing_instructions, {
           'calculated_weight' => 42,
-          'fill_z' => '1.25',
+          'fill_z' => '1.2500',
           'volume' => 1728,
           'used_volume' => '51.328125',
           'name' => 'test',
           'x' => 12,
           'y' => 12,
-          'fill_y' => '5.25',
+          'fill_y' => '5.2500',
           'weight' => 20,
-          'fill_x' => '10.5',
+          'fill_x' => '10.5000',
           'id' => ignore(),
           'z' => 12,
           'layers' => [
                         {
                           'calculated_weight' => 16,
-                          'fill_z' => '1.25',
-                          'fill_y' => '5.25',
-                          'fill_x' => '10.5',
+                          'fill_z' => '1.2500',
+                          'fill_y' => '5.2500',
+                          'fill_x' => '10.5000',
                           'rows' => [
                                       {
                                         'calculated_weight' => 9,
                                         'fill_z' => 1,
-                                        'fill_y' => '2.5',
-                                        'fill_x' => '10.5',
+                                        'fill_y' => 2.5,
+                                        'fill_x' => 10.5,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -130,9 +130,9 @@ cmp_deeply $box->packing_instructions, {
                                       },
                                       {
                                         'calculated_weight' => 7,
-                                        'fill_z' => '1.25',
-                                        'fill_y' => '2.75',
-                                        'fill_x' => '8.25',
+                                        'fill_z' => 1.25,
+                                        'fill_y' => 2.75,
+                                        'fill_x' => 8.25,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -157,32 +157,32 @@ cmp_deeply $box->packing_instructions, {
 $box->pack_item($lgbox); 
 
 is $box->count_layers, 2, 'Added another layer';
-is $box->fill_z, 2.75, 'fill_z for two layers';
+is $box->fill_z, '2.7500', 'fill_z for two layers';
 cmp_deeply $box->packing_instructions, {
           'calculated_weight' => 54,
-          'fill_z' => '2.75',
+          'fill_z' => '2.7500',
           'volume' => 1728,
           'used_volume' => '224.671875',
           'name' => 'test',
           'x' => 12,
           'y' => 12,
-          'fill_y' => '10.75',
+          'fill_y' => '10.7500',
           'weight' => 20,
-          'fill_x' => '10.75',
+          'fill_x' => '10.7500',
           'id' => ignore(),
           'z' => 12,
           'layers' => [
                         {
                           'calculated_weight' => 16,
-                          'fill_z' => '1.25',
-                          'fill_y' => '5.25',
-                          'fill_x' => '10.5',
+                          'fill_z' => '1.2500',
+                          'fill_y' => '5.2500',
+                          'fill_x' => '10.5000',
                           'rows' => [
                                       {
                                         'calculated_weight' => 9,
                                         'fill_z' => 1,
-                                        'fill_y' => '2.5',
-                                        'fill_x' => '10.5',
+                                        'fill_y' => 2.5,
+                                        'fill_x' => 10.50,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -209,9 +209,9 @@ cmp_deeply $box->packing_instructions, {
                                       },
                                       {
                                         'calculated_weight' => 7,
-                                        'fill_z' => '1.25',
-                                        'fill_y' => '2.75',
-                                        'fill_x' => '8.25',
+                                        'fill_z' => 1.25,
+                                        'fill_y' => 2.75,
+                                        'fill_x' => 8.25,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -233,15 +233,15 @@ cmp_deeply $box->packing_instructions, {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -261,32 +261,32 @@ foreach (1..6) {
     $box->pack_item($lgbox);
 }
 is $box->count_layers, 8, 'Added eight layers';
-is $box->fill_z, 11.75, 'fill_z for 8 layers';
+is $box->fill_z, '11.7500', 'fill_z for 8 layers';
 cmp_deeply $box->packing_instructions,  {
           'calculated_weight' => 126,
-          'fill_z' => '11.75',
+          'fill_z' => '11.7500',
           'volume' => 1728,
           'used_volume' => '1264.734375',
           'name' => 'test',
           'x' => 12,
           'y' => 12,
-          'fill_y' => '10.75',
+          'fill_y' => '10.7500',
           'weight' => 20,
-          'fill_x' => '10.75',
+          'fill_x' => '10.7500',
           'id' => ignore(),
           'z' => 12,
           'layers' => [
                         {
                           'calculated_weight' => 16,
-                          'fill_z' => '1.25',
-                          'fill_y' => '5.25',
-                          'fill_x' => '10.5',
+                          'fill_z' => '1.2500',
+                          'fill_y' => '5.2500',
+                          'fill_x' => '10.5000',
                           'rows' => [
                                       {
                                         'calculated_weight' => 9,
                                         'fill_z' => 1,
-                                        'fill_y' => '2.5',
-                                        'fill_x' => '10.5',
+                                        'fill_y' => 2.5,
+                                        'fill_x' => 10.5,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -313,9 +313,9 @@ cmp_deeply $box->packing_instructions,  {
                                       },
                                       {
                                         'calculated_weight' => 7,
-                                        'fill_z' => '1.25',
-                                        'fill_y' => '2.75',
-                                        'fill_x' => '8.25',
+                                        'fill_z' => 1.25,
+                                        'fill_y' => 2.75,
+                                        'fill_x' => 8.25,
                                         'items' => [
                                                      {
                                                        'y' => '2.5',
@@ -337,15 +337,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -360,15 +360,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -383,15 +383,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -406,15 +406,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -429,15 +429,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -452,15 +452,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
@@ -475,15 +475,15 @@ cmp_deeply $box->packing_instructions,  {
                         },
                         {
                           'calculated_weight' => 12,
-                          'fill_z' => '1.5',
-                          'fill_y' => '10.75',
-                          'fill_x' => '10.75',
+                          'fill_z' => '1.5000',
+                          'fill_y' => '10.7500',
+                          'fill_x' => '10.7500',
                           'rows' => [
                                       {
                                         'calculated_weight' => 12,
-                                        'fill_z' => '1.5',
-                                        'fill_y' => '10.75',
-                                        'fill_x' => '10.75',
+                                        'fill_z' => 1.5,
+                                        'fill_y' => 10.75,
+                                        'fill_x' => 10.75,
                                         'items' => [
                                                      {
                                                        'y' => '10.75',
