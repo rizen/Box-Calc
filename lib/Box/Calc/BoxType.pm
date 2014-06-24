@@ -3,6 +3,8 @@ package Box::Calc::BoxType;
 use strict;
 use warnings;
 use Moose;
+with 'Box::Calc::Role::Container';
+with 'Box::Calc::Role::Mailable';
 use Ouch;
 
 =head1 NAME
@@ -27,59 +29,39 @@ Constructor.
 
 =item x
 
-The width of your box.
+The interior width of your box.
 
 =item y
 
-The length of your box.
+The interior length of your box.
 
 =item z
 
-The thickness of your box.
-
-=item weight
-
-The weight of the empty box.
+The interior thickness of your box.
 
 =item name
 
 The name of your box.
 
-=item compatible_services
+=item weight
 
-An array reference of shipping services this box is compatible with. See the complete list of services at L<http://api.boxcalc.net>. This is only necessary if you'r e using the C<shipping_options> method. 
-
-=back
+The weight of your box.
 
 =back
 
+=back
+
+=head2 name
+
+Returns the name of this box.
+
+
+=head2 category
+
+Returns the category name associated with this box type if any.
 
 =cut
 
-
-has x => (
-    is          => 'ro',
-    required    => 1,
-    isa         => 'Num',
-);
-
-has y => (
-    is          => 'ro',
-    required    => 1,
-    isa         => 'Num',
-);
-
-has z => (
-    is          => 'ro',
-    required    => 1,
-    isa         => 'Num',
-);
-
-has weight => (
-    is          => 'ro',
-    isa         => 'Num',
-    required    => 1,
-);
 
 has name => (
     is          => 'ro',
@@ -87,11 +69,23 @@ has name => (
     required    => 1,
 );
 
-has compatible_services => (
+has category => (
     is          => 'ro',
-    isa         => 'ArrayRef',
-    default     => sub {[]},
+    isa         => 'Str',
+    default     => '',
 );
+
+sub describe {
+    my $self = shift;
+    return {
+        name    => $self->name,
+        weight  => $self->weight,
+        x       => $self->x,
+        y       => $self->y,
+        z       => $self->z,
+        category=> $self->category,
+    };
+}
 
 
 no Moose;

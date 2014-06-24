@@ -1,3 +1,6 @@
+version 1.0000 - June 23, 2014
+ * No longer a wrapper of a web service. Exposed code behind the web service as it's own public module.
+
 version 0.0501 - Novemver 6, 2012
  * Fix some cosmetic problems.
  * Added some parameter validation for the shipping_options method.
