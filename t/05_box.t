@@ -24,14 +24,14 @@ is $box->fill_x, '0.0000', 'fill_x 0';
 is $box->fill_y, '0.0000', 'fill_y 0';
 is $box->fill_z, '0.0000', 'fill_z 0';
 is $box->name, 'test', 'overriding the default name';
-is $box->calculate_weight, 26, 'taking box weight and void filler weight into account in weight calculations';
+is $box->calculate_weight, 34, 'taking box weight and void filler weight into account in weight calculations';
 
 cmp_deeply $box->dimensions, [12,12,12], 'dimensions';
 cmp_deeply $box->outer_dimensions, [12,12,12], 'outer dimensions same as inner dimensions when not specified';
 
 is $box->count_layers, 1, 'A new box has a layer created automatically';
 cmp_deeply $box->packing_instructions, {
-          'calculated_weight' => 26,
+          'calculated_weight' => 34,
           'fill_z' => '0.0000',
           'volume' => 1728,
           'used_volume' => '0',
@@ -80,7 +80,7 @@ $box->pack_item($deck);
 $box->pack_item($tarot_deck);
 is $box->count_layers, 1, 'Still on one layer';
 cmp_deeply $box->packing_instructions, {
-          'calculated_weight' => 42,
+          'calculated_weight' => 50,
           'fill_z' => '1.2500',
           'volume' => 1728,
           'used_volume' => '51.328125',
@@ -159,7 +159,7 @@ $box->pack_item($lgbox);
 is $box->count_layers, 2, 'Added another layer';
 is $box->fill_z, '2.7500', 'fill_z for two layers';
 cmp_deeply $box->packing_instructions, {
-          'calculated_weight' => 54,
+          'calculated_weight' => 62,
           'fill_z' => '2.7500',
           'volume' => 1728,
           'used_volume' => '224.671875',
@@ -263,7 +263,7 @@ foreach (1..6) {
 is $box->count_layers, 8, 'Added eight layers';
 is $box->fill_z, '11.7500', 'fill_z for 8 layers';
 cmp_deeply $box->packing_instructions,  {
-          'calculated_weight' => 126,
+          'calculated_weight' => 134,
           'fill_z' => '11.7500',
           'volume' => 1728,
           'used_volume' => '1264.734375',

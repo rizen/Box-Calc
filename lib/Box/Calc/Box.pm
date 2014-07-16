@@ -153,7 +153,7 @@ has void_weight => (
     lazy    => 1,
     default => sub {
         my $self = shift;
-        return $self->weight * 0.3;
+        return $self->weight * 0.7;
     }
 );
 

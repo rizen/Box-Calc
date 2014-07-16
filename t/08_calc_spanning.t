@@ -44,7 +44,7 @@ cmp_deeply
     $calc->packing_instructions,
         [
           {
-            'calculated_weight' => '14.8',
+            'calculated_weight' => '17.2',
             'fill_z' => '2.0000',
             'volume' => 8,
             'used_volume' => '7',
@@ -176,7 +176,7 @@ cmp_deeply
     $calc->packing_instructions,
     [
           {
-            'calculated_weight' => '25.7',
+            'calculated_weight' => '29.3',
             'fill_z' => '2.0000',
             'volume' => 27,
             'used_volume' => '14',
@@ -366,7 +366,7 @@ cmp_deeply
     $calc->packing_instructions,
     [
           {
-            'calculated_weight' => '38.7',
+            'calculated_weight' => '42.3',
             'fill_z' => '3.0000',
             'volume' => 27,
             'used_volume' => '27',
@@ -667,7 +667,7 @@ cmp_deeply
                         ]
           },
           {
-            'calculated_weight' => '12.7',
+            'calculated_weight' => '16.3',
             'fill_z' => '1.0000',
             'volume' => 27,
             'used_volume' => '1',
