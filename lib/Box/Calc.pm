@@ -35,7 +35,7 @@ Box::Calc - Packing Algorithm
  # how many boxes do you need
  my $box_count = $box_calc->count_boxes; # 2
  
- # interogate the boes
+ # interrogate the boxes
  my $box = $box_calc->get_box(-1); # the last box
  my $weight = $box->calculate_weight;
  
