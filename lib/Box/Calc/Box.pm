@@ -159,7 +159,7 @@ has void_weight => (
 
 =head2 calculate_weight()
 
-Calculates and returns the weight of all the layers in this box, including the weight of this box.
+Calculates and returns the weight of all the layers in this box, including the weight of this box and any packing filler (see L<void_weight>).
 
 =cut
 
