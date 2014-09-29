@@ -834,6 +834,7 @@ There are some additional optimizations that could be done to speed things up a 
 L<Moose>
 L<Ouch>
 L<Log::Any>
+L<Data::GUID>
 
 =head1 SUPPORT
 

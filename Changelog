@@ -1,3 +1,6 @@
+version 1.0001 - September 28, 2014
+ * Declaired Data::GUID dependency.
+
 version 1.0000 - June 23, 2014
  * No longer a wrapper of a web service. Exposed code behind the web service as it's own public module.
 
