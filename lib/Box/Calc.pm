@@ -88,8 +88,6 @@ Repeat from step 3 until all items are packed into boxes.
 
 =back
 
-=back
-
 =head2 Motivation
 
 At The Game Crafter (L<http://www.thegamecrafter.com>) we ship a lot of games and game pieces. We tried using a more complicated system for figuring out which size box to use, or how many boxes would be needed in a spanning situation. The problem was that those algorithms made the boxes pack so tightly that our staff spent a lot more time putting the boxes together. This algorithm is relatively dumb, but dumb in a good way. The boxes are easy and fast to pack. By releasing this, we hope it can help those who are either using too complicated a system, or no system at all for figuring out how many boxes they need for shipping/storing materials. 
