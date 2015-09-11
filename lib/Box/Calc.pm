@@ -422,6 +422,33 @@ sub sort_items_by_zxy {
     return \@sorted;
 }
 
+=head2 sort_items_by_z_desc_A()
+
+Returns an array reference of the list of C<items> registered sorted by z DESC, then area DESC
+
+=over
+
+=item items
+
+Optional. An array reference of items. Will call C<items> if not passed in.
+
+=back
+
+=cut
+
+sub sort_items_by_z_desc_A {
+    my $self = shift;
+    my $items = shift || $self->items;
+    my @sorted = map  { $_->[1] }
+                 sort {
+                    $b->[0]->{z} <=> $a->[0]->{z}
+                 || $b->[0]->{A} <=> $a->[0]->{A}
+                 }
+                 ##Fetch Z and calculate A
+                 map  { [ { z=>$_->z, A=>$_->x*$_->y }, $_ ] } @{$items};
+    return \@sorted;
+}
+
 =head2 sort_items_by_zA()
 
 Returns an array reference of the list of C<items> registered sorted by z ASC, then area DESC
