@@ -201,7 +201,7 @@ has box_type_categories => (
             next if $box_type->category eq '';
             $categories{$box_type->category} = 1;
         }
-        return [keys %categories];
+        return [sort keys %categories];
     },
 );
 
