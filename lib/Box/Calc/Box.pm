@@ -58,6 +58,18 @@ The weight of your box.
 
 =back
 
+=head2 fill_weight()
+
+Returns the weight of the items in this box.
+
+=cut
+
+has fill_weight => (
+    is          => 'rw',
+    default     => 0,
+    isa         => 'Num',
+);
+
 =head2 fill_x()
 
 Returns how full the box is in the C<x> dimension.
@@ -165,11 +177,7 @@ Calculates and returns the weight of all the layers in this box, including the w
 
 sub calculate_weight {
     my $self = shift;
-    my $weight = $self->weight + $self->void_weight;
-    foreach my $layer (@{$self->layers}) {
-        $weight += $layer->calculate_weight;
-    }
-    return $weight;
+    return $self->weight + $self->void_weight + $self->fill_weight;
 }
 
 =head2 create_layer()
@@ -212,12 +220,17 @@ sub pack_item {
         $log->debug(Dumper($item));
         return 0;
     }
+    if ($item->weight + $self->calculate_weight >= $self->max_weight) {
+        $log->info($item->{name}.' would make this box weigh too much, requesting new box.');
+        return 0;
+    }
     # item height > ( box height - box fill + the height of the current layer )
     if ($item->z > $self->z - $self->fill_z + $self->layers->[-1]->fill_z) {
         $log->info($item->{name}.' would make the layer too tall to fit in the box, requesting new box.');
         return 0;
     }
     if ($self->layers->[-1]->pack_item($item)) {
+        $self->fill_weight($self->fill_weight + $item->weight);
         return 1;
     }
     else {

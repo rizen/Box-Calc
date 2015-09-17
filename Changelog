@@ -1,3 +1,6 @@
+version 1.0200 - September 17, 2015
+ * Added max_weight attribute to box types so that boxes span based upon weight. Defaults to 1000.
+
 version 1.0100 - September 11, 2015
  * Added new sort algorithm: sort_items_by_z_desc_A
  * Integration with Travis (cakirke)

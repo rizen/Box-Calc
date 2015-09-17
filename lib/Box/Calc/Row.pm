@@ -28,6 +28,18 @@ The maximimum width of the row. This is equivalent to the C<x> or longest dimens
 
 =back
 
+=head2 fill_weight()
+
+Returns the weight of the items in this row.
+
+=cut
+
+has fill_weight => (
+    is          => 'rw',
+    default     => 0,
+    isa         => 'Num',
+);
+
 =head2 fill_x()
 
 Returns how full the row is in the C<x> dimension.
@@ -104,11 +116,7 @@ Calculates the weight of all the items in this row, and returns that value.
 
 sub calculate_weight {
     my $self = shift;
-    my $weight = 0;
-    foreach my $item (@{$self->items}) {
-        $weight += $item->weight;
-    }
-    return $weight;
+    return $self->fill_weight;
 }
 
 =head2 pack_item(item)
@@ -134,6 +142,7 @@ sub pack_item {
         return 0;
     }
     push @{$self->items}, $item;
+    $self->fill_weight($self->fill_weight + $item->weight);
     $self->fill_x($self->fill_x + $item->x);
     $self->fill_y($item->y) if $item->y > $self->fill_y;
     $self->fill_z($item->z) if $item->z > $self->fill_z;
