@@ -86,7 +86,7 @@ has outer_extent => (
     required    => 1,
 );
 
-=item max_weight
+=head2 max_weight
 
 The max weight of the items including the container. Defaults to 1000.
 
