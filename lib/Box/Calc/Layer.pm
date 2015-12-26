@@ -244,7 +244,7 @@ sub packing_instructions {
 
 sub used_volume {
     my $self = shift;
-    return sum map { $_->used_volume } @{ $self->rows };
+    return sum map { $_->used_volume || 0 } @{ $self->rows };
 }
 
 
