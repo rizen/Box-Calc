@@ -188,6 +188,17 @@ sub packing_instructions {
     };
 }
 
+
+=head2 used_volume
+
+Returns the real used volume for this row.
+
+=head2 volume 
+
+Returns the exact volume needed for this row.    
+
+=cut
+
 sub used_volume {
     my $self = shift;
     return sum map { $_->volume } @{ $self->items };

@@ -75,6 +75,12 @@ has category => (
     default     => '',
 );
 
+=head2 describe
+
+Returns a hash ref with the properties of this box type.
+
+=cut
+
 sub describe {
     my $self = shift;
     return {
