@@ -242,9 +242,21 @@ sub packing_instructions {
     }
 }
 
+
+=head2 used_volume
+
+Returns the real used volume for this layer.
+
+=head2 volume 
+
+Returns the exact volume needed for this layer.    
+
+=cut
+
+
 sub used_volume {
     my $self = shift;
-    return sum map { $_->used_volume } @{ $self->rows };
+    return sum map { $_->used_volume || 0 } @{ $self->rows };
 }
 
 
@@ -254,3 +266,6 @@ sub volume {
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
+
+=for Pod::Coverage BUILD
+

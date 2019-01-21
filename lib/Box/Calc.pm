@@ -590,6 +590,13 @@ sub reset_items {
     $self->clear_max_dimensions_of_items;
 }
 
+=head2 make_box($box_type)
+
+Handy method to create  new box using a specified
+box type.
+
+=cut
+
 sub make_box {
     my ($self, $box_type) = @_;
     return Box::Calc::Box->new(
