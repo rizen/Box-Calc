@@ -607,6 +607,7 @@ sub make_box {
         z                   => $box_type->z,
         weight              => $box_type->weight,
         max_weight          => $box_type->max_weight,
+        void_weight         => $box_type->void_weight,
         name                => $box_type->name,
         outer_x             => $box_type->outer_x,
         outer_y             => $box_type->outer_y,

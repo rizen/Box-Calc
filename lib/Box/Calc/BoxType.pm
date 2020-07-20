@@ -75,6 +75,21 @@ has category => (
     default     => '',
 );
 
+=head2 void_weight()
+
+Returns the weight assigned to the void space left in the box due to void space filler such as packing peanuts. Defaults to 70% of the box weight.
+
+=cut
+
+has void_weight => (
+    is      => 'rw',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+        return $self->weight * 0.7;
+    }
+);
+
 =head2 describe
 
 Returns a hash ref with the properties of this box type.

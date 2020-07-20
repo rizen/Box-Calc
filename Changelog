@@ -1,3 +1,6 @@
+1.0202 2010-07-13
+ * Allow void weight to be set per box type.
+
 1.0201 2019-01-21
  * Changed changelog format.
  * Fixed use of uninitialized value (Alberto Simões)
