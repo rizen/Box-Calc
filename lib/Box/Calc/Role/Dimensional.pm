@@ -137,7 +137,7 @@ around BUILDARGS => sub {
     else {
         ( $x, $y, $z ) = sort { $b <=> $a } ( $args->{x}, $args->{y}, $args->{z} );
     }
-    
+
     $args->{x} = $x;
     $args->{y} = $y;
     $args->{z} = $z;
