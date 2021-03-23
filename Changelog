@@ -1,4 +1,7 @@
-1.0202 2010-07-13
+1.03 2021-03-23
+ * Allow inserts
+
+1.0202 2020-07-13
  * Allow void weight to be set per box type.
 
 1.0201 2019-01-21

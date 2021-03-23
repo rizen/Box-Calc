@@ -4,6 +4,7 @@ use strict;
 use Moose;
 use Box::Calc::BoxType;
 use Box::Calc::Item;
+use Box::Calc::Insert;
 use Box::Calc::Box;
 use List::MoreUtils qw(natatime);
 use List::Util qw(max);
@@ -319,6 +320,29 @@ sub add_item {
     }
     return $self->get_item(-1);
 }
+
+=head2 insert
+
+An insert for a box.  Inserts typically restrict 1-3 dimensions of a particular box.
+
+=cut
+
+has insert => (
+    is => 'rw',
+    isa => 'Box::Calc::Insert',
+);
+
+=head2 used_insert
+
+A flag to tell if we used the insert.  Should be reset for every box that's attempted.
+
+=cut
+
+has used_insert => (
+    is => 'rw',
+    isa => 'Int',
+    default   => sub { 0 },
+);
 
 =head2 load(payload)
 
