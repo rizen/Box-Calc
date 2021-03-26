@@ -12,7 +12,7 @@ Box::Calc::Insert - Modify the internal size of the current box.
 
 =head1 SYNOPSIS
 
- my $item = Box::Calc::Item->new(name => 'Apple', x => 3, y => 3.3, z => 4, weight => 5, delta_x => 0.5, delta_y => 0.5, delta_z => 0, used_with_box => 'SmallBox', );
+ my $insert = Box::Calc::Insert->new(name => 'Apple', x => 3, y => 3.3, z => 4, weight => 5, delta_x => 0.5, delta_y => 0.5, delta_z => 0, used_with_box => 'SmallBox', );
 
 =head1 METHODS
 
@@ -28,23 +28,23 @@ Constructor.
 
 =item x
 
-The width of your item.
+The width of your insert.
 
 =item y
 
-The length of your item.
+The length of your insert.
 
 =item z
 
-The thickness of your item.
+The thickness of your insert.
 
 =item weight
 
-The weight of your item.
+The weight of your insert.
 
 =item name
 
-The name of your item. If you're referring it back to an external system you may wish to use this field to store you item ids instead of item names.
+The name of your insert. If you're referring it back to an external system you may wish to use this field to store you insert ids instead of insert names.
 
 =item well_x
 
@@ -76,7 +76,7 @@ has [qw/well_x well_y well_z/] => (
 
 =head2 name
 
-Returns the name of this item.
+Returns the name of this insert.
 
 =cut
 
@@ -95,7 +95,7 @@ has used_with_box => (
 
 =head2 describe
 
-Returns all the important details about this item as a hash reference.
+Returns all the important details about this insert as a hash reference.
 
 =cut
 
