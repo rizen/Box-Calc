@@ -196,6 +196,29 @@ sub BUILD {
     $self->create_layer;
 }
 
+=head2 has_insert()
+
+Returns if an insert was placed into the box during packing.
+
+=cut
+
+has has_insert => (
+    is          => 'rw',
+    isa         => 'Int',
+    default     => sub { 0 },
+);
+
+=head2 insert_name()
+
+If an insert was put into this box, what's the name of it (for packing list, packing instructions)
+
+=cut
+
+has packing_name => (
+    is          => 'rw',
+    isa         => 'Str',
+);
+
 =head2 pack_item(item)
 
 Add a L<Box::Calc::Item> to this box.
@@ -283,7 +306,7 @@ Returns a description of the box. Example:
 
 sub packing_instructions {
     my $self = shift;
-    return {
+    my $instructions = {
         x                   => $self->x,
         y                   => $self->y,
         z                   => $self->z,
@@ -297,7 +320,11 @@ sub packing_instructions {
         used_volume         => $self->used_volume,
         volume              => $self->volume,
         layers              => [map { $_->packing_instructions } @{ $self->layers }],
-  };
+    };
+    if ($self->has_insert) {
+        $instructions->{insert} = $self->insert_name
+    }
+    return $instructions;
 }
 
 =head2 used_volume

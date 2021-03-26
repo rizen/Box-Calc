@@ -759,8 +759,17 @@ sub pack_items {
     my $countdown = scalar(@box_types);
     BOXTYPE: foreach my $box_type (@box_types) {
         $log->info("Box Type: ".$box_type->name);
+        $self->used_insert(0);
         $countdown--;
         my $box = $self->make_box($box_type);
+        if ($self->insert && ! $self->used_insert) {  ##One insert per packing setup, only
+            $self->used_insert(1);
+            $box->x($self->insert->well_x);
+            $box->y($self->insert->well_y);
+            $box->z($self->insert->well_z);
+            $box->has_insert(1);
+            $box->insert_name($self->insert->name);
+        }
         ITEM: foreach my $item (@{$items}) {
             $log->info("Item: ".$item->name);
             
@@ -843,6 +852,9 @@ sub packing_list {
             weight          => $weight,
             packing_list    => $list,
         };
+        if ($box->has_insert) {
+            $boxes[-1]->{insert} = $box->insert_name;
+        }
     }
     return \@boxes;
 }
