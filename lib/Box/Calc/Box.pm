@@ -177,7 +177,11 @@ Calculates and returns the weight of all the layers in this box, including the w
 
 sub calculate_weight {
     my $self = shift;
-    return $self->weight + $self->void_weight + $self->fill_weight;
+    my $weight = $self->weight + $self->void_weight + $self->fill_weight;
+    if ($self->has_insert) {
+        $weight += $self->insert->weight;
+    }
+    return $weight;
 }
 
 =head2 create_layer()
@@ -208,15 +212,15 @@ has has_insert => (
     default     => sub { 0 },
 );
 
-=head2 insert_name()
+=head2 insert
 
-If an insert was put into this box, what's the name of it (for packing list, packing instructions)
+An insert for a box.  Inserts typically restrict 1-3 dimensions of a particular box.
 
 =cut
 
-has packing_name => (
-    is          => 'rw',
-    isa         => 'Str',
+has insert => (
+    is => 'rw',
+    isa => 'Box::Calc::Insert',
 );
 
 =head2 pack_item(item)
@@ -322,7 +326,7 @@ sub packing_instructions {
         layers              => [map { $_->packing_instructions } @{ $self->layers }],
     };
     if ($self->has_insert) {
-        $instructions->{insert} = $self->insert_name
+        $instructions->{insert} = $self->insert->name
     }
     return $instructions;
 }

@@ -768,7 +768,7 @@ sub pack_items {
             $box->y($self->insert->well_y);
             $box->z($self->insert->well_z);
             $box->has_insert(1);
-            $box->insert_name($self->insert->name);
+            $box->insert($self->insert);
         }
         ITEM: foreach my $item (@{$items}) {
             $log->info("Item: ".$item->name);
@@ -853,7 +853,7 @@ sub packing_list {
             packing_list    => $list,
         };
         if ($box->has_insert) {
-            $boxes[-1]->{insert} = $box->insert_name;
+            $boxes[-1]->{insert} = $box->insert->name;
         }
     }
     return \@boxes;
