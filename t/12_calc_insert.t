@@ -58,4 +58,21 @@ my $object = $calc->add_insert(
 isa_ok $object, 'Box::Calc::Item', 'Second insert gets packed';
 is $calc->count_items, 51, 'Shows up in list of items';
 
+$calc->reset_items;
+$calc->reset_boxes;
+
+my $item = $calc->add_item(50,
+    x => 2.75,
+    y => 4.75,
+    z => 0.01,
+    name => 'Card from Deck',
+    weight => 0.1,
+);
+is $calc->count_items, 50, 'Added a bunch of cards, again';
+$calc->pack_items();
+is $calc->count_boxes, 1, 'only one box was used';
+is $calc->used_insert, 1, 'The insert was used';
+
+note explain $calc->packing_list;
+
 done_testing;

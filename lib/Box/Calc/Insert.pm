@@ -67,12 +67,45 @@ be treated like any other C<Box::Calc::Item>
 
 =back
 
+=cut
+
 has [qw/well_x well_y well_z/] => (
     is          => 'rw',
     required    => 1,
     isa         => 'Num',
 );
 
+##Make sure that the well dimensions are sorted the same way as the box dimensions
+
+around BUILDARGS => sub {
+    my $orig      = shift;
+    my $className = shift;
+    my $args;
+    if (ref $_[0] eq 'HASH') {
+        $args = shift;
+    }
+    else {
+        $args = { @_ };
+    }
+    # sort large to small
+	my ( $well_x, $well_y, $well_z );
+
+    if ( $args->{no_sort} ) {
+        ( $well_x, $well_y, $well_z ) = ( $args->{well_x}, $args->{well_y}, $args->{well_z} );
+    }
+    elsif ( $args->{swap_well_xwell_y} ) {
+        ( $well_x, $well_y, $well_z ) = sort { $b <=> $a } ( $args->{well_x}, $args->{well_y}, $args->{well_z} );
+        ( $well_x, $well_y ) = ( $well_y, $well_x );
+    }
+    else {
+        ( $well_x, $well_y, $well_z ) = sort { $b <=> $a } ( $args->{well_x}, $args->{well_y}, $args->{well_z} );
+    }
+
+    $args->{well_x} = $well_x;
+    $args->{well_y} = $well_y;
+    $args->{well_z} = $well_z;
+    return $className->$orig($args);
+};
 
 =head2 name
 
