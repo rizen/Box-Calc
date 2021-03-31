@@ -42,6 +42,20 @@ my $insert = $calc->add_insert(
     weight => 0.5,
     used_with_box => 'Display Deck Box',
 );
-isa_ok $item, 'Box::Calc::Insert';
+isa_ok $insert, 'Box::Calc::Insert';
+
+my $object = $calc->add_insert(
+    name => 'Second Insert',
+    x => 5.5,
+    y => 3.5,
+    z => 1,
+    well_x => 2.75,
+    well_y => 4.75,
+    well_z => 1.00,
+    weight => 0.5,
+    used_with_box => 'Display Deck Box',
+);
+isa_ok $object, 'Box::Calc::Item', 'Second insert gets packed';
+is $calc->count_items, 51, 'Shows up in list of items';
 
 done_testing;
