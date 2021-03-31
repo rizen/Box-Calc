@@ -12,7 +12,7 @@ Box::Calc::Insert - Modify the internal size of the current box.
 
 =head1 SYNOPSIS
 
- my $insert = Box::Calc::Insert->new(name => 'Apple', x => 3, y => 3.3, z => 4, weight => 5, delta_x => 0.5, delta_y => 0.5, delta_z => 0, used_with_box => 'SmallBox', );
+ my $insert = Box::Calc::Insert->new(name => 'Apple', x => 3, y => 3.3, z => 4, weight => 5, well_x => 0.5, well_y => 0.5, well_z => 0, used_with_box => 'SmallBox', );
 
 =head1 METHODS
 

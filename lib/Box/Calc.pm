@@ -344,6 +344,33 @@ has used_insert => (
     default   => sub { 0 },
 );
 
+=head2 add_insert(params)
+
+Adds an insert to pack and hold items.  If an insert has already been added, it will automatically
+become a new Item.
+
+=over
+
+=item params
+
+The constructor parameters for the L<Box::Calc::Insert>.
+
+=back
+
+=cut
+
+sub add_insert {
+    my ($self, @params) = @_;
+    if ($self->insert) {
+        return $self->add_item(1, @params);
+    }
+    else {
+        my $insert = Box::Calc::Insert->new(@params);
+        $self->insert($insert);
+        return $insert;
+    }
+}
+
 =head2 load(payload)
 
 Allows the loading of an entire dataset.
