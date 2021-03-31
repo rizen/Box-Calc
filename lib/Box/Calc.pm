@@ -790,6 +790,7 @@ sub pack_items {
         $countdown--;
         my $box = $self->make_box($box_type);
         if ($self->insert && ! $self->used_insert) {  ##One insert per packing setup, only
+            $log->info("Used insert: ".$self->insert->name);
             $self->used_insert(1);
             $box->x($self->insert->well_x);
             $box->y($self->insert->well_y);
