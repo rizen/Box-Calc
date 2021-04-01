@@ -839,6 +839,7 @@ sub pack_items {
                     $log->info("no more box types, spanning");
                     $self->push_boxes($box);
                     $box = $self->make_box($box_type);
+                    $box->create_layer();
                     redo ITEM;
                 }
             }
