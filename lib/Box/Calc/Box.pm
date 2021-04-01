@@ -8,7 +8,7 @@ with 'Box::Calc::Role::Container';
 with 'Box::Calc::Role::Mailable';
 use Box::Calc::Layer;
 use Data::GUID;
-use List::Util qw/sum/;
+use List::Util qw/sum sum0/;
 use Log::Any qw($log);
 use Data::Dumper;
 
@@ -336,7 +336,7 @@ Returns the real used volume for this box.
 
 sub used_volume {
     my $self = shift;
-    return sum map { $_->used_volume } @{ $self->layers };
+    return sum0 map { $_->used_volume } @{ $self->layers };
 }
 
 =head2 volume 

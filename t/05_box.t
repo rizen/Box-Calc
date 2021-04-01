@@ -29,7 +29,7 @@ is $box->calculate_weight, 34, 'taking box weight and void filler weight into ac
 cmp_deeply $box->dimensions, [12,12,12], 'dimensions';
 cmp_deeply $box->outer_dimensions, [12,12,12], 'outer dimensions same as inner dimensions when not specified';
 
-is $box->count_layers, 1, 'A new box has a layer created automatically';
+is $box->count_layers, 0, 'A new box does not create layers automatically';
 cmp_deeply $box->packing_instructions, {
           'calculated_weight' => 34,
           'fill_z' => '0.0000',
@@ -43,23 +43,7 @@ cmp_deeply $box->packing_instructions, {
           'fill_x' => '0.0000',
           'id' => ignore(),
           'z' => 12,
-          'layers' => [
-                        {
-                          'calculated_weight' => 0,
-                          'fill_z' => '0.0000',
-                          'fill_y' => '0.0000',
-                          'fill_x' => '0.0000',
-                          'rows' => [
-                                      {
-                                        'calculated_weight' => 0,
-                                        'fill_z' => 0,
-                                        'fill_y' => 0,
-                                        'fill_x' => 0,
-                                        'items' => []
-                                      }
-                                    ]
-                        }
-                      ]
+          'layers' => []
         }, 'Empty packing list for an empty box';
 
 can_ok($box, 'pack_item');
@@ -73,6 +57,7 @@ my $mgbox = Box::Calc::Item->new(x => 8.75, y => 6.5, z => 1.25, name => 'Medium
 my $lgbox = Box::Calc::Item->new(x => 10.75, y => 10.75, z => 1.5, name => 'Large Game Box', weight => 12);
 
 note 'Begin packing';
+$box->create_layer();
 $box->pack_item($deck);
 $box->pack_item($deck);
 $box->pack_item($deck);
