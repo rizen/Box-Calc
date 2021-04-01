@@ -36,7 +36,7 @@ my $box_type = $calc->add_box_type({
 isa_ok $box_type, 'Box::Calc::BoxType';
 is $calc->count_box_types, 1, 'Added one box type to calc';
 
-my $item = $calc->add_item(5,
+my $item = $calc->add_item(50,
     x => 2.75,
     y => 4.75,
     z => 0.01,
@@ -44,7 +44,7 @@ my $item = $calc->add_item(5,
     weight => 0.1,
 );
 isa_ok $item, 'Box::Calc::Item';
-is $calc->count_items, 5, 'Added a bunch of cards';
+is $calc->count_items, 50, 'Added a bunch of cards';
 
 my $insert = $calc->add_insert(
     name => 'Insert',
@@ -76,14 +76,14 @@ is $calc->count_items, 51, 'Shows up in list of items';
 $calc->reset_items;
 $calc->reset_boxes;
 
-my $item = $calc->add_item(5,
+my $item = $calc->add_item(50,
     x => 2.75,
     y => 4.75,
     z => 0.01,
     name => 'Card from Deck',
     weight => 0.1,
 );
-is $calc->count_items, 5, 'Added a bunch of cards, again';
+is $calc->count_items, 50, 'Added a bunch of cards, again';
 $calc->pack_items();
 is $calc->count_boxes, 1, 'only one box was used';
 is $calc->used_insert, 1, 'The insert was used';
