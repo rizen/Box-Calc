@@ -192,13 +192,8 @@ Adds a new L<Box::Calc::Layer> to this box.
 
 sub create_layer {
     my $self = shift;
+    $log->info("Creating layer");
     push @{$self->layers}, Box::Calc::Layer->new( max_x => $self->x, max_y => $self->y, );
-}
-
-sub BUILD {
-    my $self = shift;
-    $log->info("Creating initial layer");
-    $self->create_layer;
 }
 
 =head2 has_insert()

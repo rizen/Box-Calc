@@ -798,6 +798,7 @@ sub pack_items {
             $box->has_insert(1);
             $box->insert($self->insert);
         }
+        $box->create_layer;
         ITEM: foreach my $item (@{$items}) {
             $log->info("Item: ".$item->name);
             
