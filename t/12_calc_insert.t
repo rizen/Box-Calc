@@ -88,6 +88,4 @@ $calc->pack_items();
 is $calc->count_boxes, 1, 'only one box was used';
 is $calc->used_insert, 1, 'The insert was used';
 
-note explain $calc->packing_list;
-
 done_testing;
