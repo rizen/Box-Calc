@@ -197,6 +197,7 @@ sub create_layer {
 
 sub BUILD {
     my $self = shift;
+    $log->info("Creating initial layer");
     $self->create_layer;
 }
 
@@ -266,6 +267,7 @@ sub pack_item {
             return 0;
         }
         else {
+            $log->info('Creating a layer to pack');
             $self->create_layer;
             return $self->pack_item($item, $count + 1);
         }

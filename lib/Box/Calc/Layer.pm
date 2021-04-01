@@ -199,6 +199,7 @@ sub pack_item {
             return 0;
         }
         else {
+            $log->info('Creating row');
             $self->create_row;
             return $self->pack_item($item, $count + 1);
         }
