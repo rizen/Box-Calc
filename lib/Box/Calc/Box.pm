@@ -238,7 +238,7 @@ The L<Box::Calc::Item> instance you want to add to this box.
 sub pack_item {
     my ($self, $item, $count) = @_;
     $count ||= 1;
-    if ($count > 99) {
+    if ($count > 5) {
         $log->warn($item->{name}.' is causing infinite recursion in Box::Calc');
         $log->debug(Dumper($item));
         return 0;
