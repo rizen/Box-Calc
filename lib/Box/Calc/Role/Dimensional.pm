@@ -95,11 +95,10 @@ Returns an array reference containing x, y, and z.
 
 =cut
 
-has dimensions => (
-    is          => 'ro',
-    isa         => 'ArrayRef',
-    required    => 1,
-);
+sub dimensions {
+    my ($self) = @_;
+    return [ $self->x, $self->y, $self->z, ];
+}
 
 =head2 extent
 
@@ -142,7 +141,6 @@ around BUILDARGS => sub {
     $args->{y} = $y;
     $args->{z} = $z;
     $args->{volume} = $x * $y * $z;
-    $args->{dimensions} = [$x, $y, $z];
     $args->{extent} = join(',', $x, $y, $z);
     return $className->$orig($args);
 };

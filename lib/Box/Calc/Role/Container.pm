@@ -68,11 +68,10 @@ Returns an array reference containing outer_x, outer_y, and outer_z.
 
 =cut
 
-has outer_dimensions => (
-    is          => 'ro',
-    isa         => 'ArrayRef',
-    required    => 1,
-);
+sub outer_dimensions {
+    my ($self) = @_;
+    return [ $self->outer_x, $self->outer_y, $self->outer_z, ];
+}
 
 =head2 outer_extent
 
