@@ -1,7 +1,7 @@
-1.0202 2010-07-13
+1.0204 2010-07-13
  * Fail faster if you're caught in an infinite loop.
- * The dimensions method now dynamically shows x, y and z for the object, instead of the dimensions at the time the object was instanciated
  * Setup an example of logging in tests
+ * Change several Moose methods to regular subroutines so they update along with x,y,z for Dimensionals
 
 1.0202 2010-07-13
  * Allow void weight to be set per box type.
