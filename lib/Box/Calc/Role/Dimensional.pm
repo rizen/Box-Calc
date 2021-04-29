@@ -83,11 +83,10 @@ Returns the result of multiplying x, y, and z.
 
 =cut
 
-has volume => (
-    is          => 'ro',
-    isa         => 'Num',
-    required    => 1,
-);
+sub volume {
+    my ($self) = @_;
+    return $self->x * $self->y * $self->z;
+}
 
 =head2 dimensions
 
@@ -106,11 +105,10 @@ Returns a string of C<x,y,z>. Good for comparing whether two items are dimension
 
 =cut
 
-has extent => (
-    is          => 'ro',
-    isa         => 'Str',
-    required    => 1,
-);
+sub extent {
+    my ($self) = @_;
+    return join ',', $self->x, $self->y, $self->z; 
+}
 
 around BUILDARGS => sub {
     my $orig      = shift;
@@ -140,8 +138,6 @@ around BUILDARGS => sub {
     $args->{x} = $x;
     $args->{y} = $y;
     $args->{z} = $z;
-    $args->{volume} = $x * $y * $z;
-    $args->{extent} = join(',', $x, $y, $z);
     return $className->$orig($args);
 };
 

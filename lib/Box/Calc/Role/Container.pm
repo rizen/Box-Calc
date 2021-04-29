@@ -56,11 +56,11 @@ Returns the result of multiplying outer_x, outer_y, and outer_z.
 
 =cut
 
-has outer_volume => (
-    is          => 'ro',
-    isa         => 'Num',
-    required    => 1,
-);
+
+sub outer_volume {
+    my ($self) = @_;
+    return $self->outer_x * $self->outer_y * $self->outer_z;
+}
 
 =head2 outer_dimensions
 
@@ -79,11 +79,11 @@ Returns a string of C<outer_x,outer_y,outer_z>. Good for comparing whether two i
 
 =cut
 
-has outer_extent => (
-    is          => 'ro',
-    isa         => 'Str',
-    required    => 1,
-);
+
+sub outer_extent {
+    my ($self) = @_;
+    return join ',', $self->outer_x, $self->outer_y, $self->outer_z; 
+}
 
 =head2 max_weight
 
@@ -118,9 +118,6 @@ around BUILDARGS => sub {
     $args->{outer_x} = $x;
     $args->{outer_y} = $y;
     $args->{outer_z} = $z;
-    $args->{outer_volume} = $x * $y * $z;
-    $args->{outer_dimensions} = [$x, $y, $z];
-    $args->{outer_extent} = join(',', $x, $y, $z);
     return $className->$orig($args);
 };
 

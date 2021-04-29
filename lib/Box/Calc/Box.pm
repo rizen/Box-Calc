@@ -295,6 +295,7 @@ sub packing_instructions {
         weight              => $self->weight,
         calculated_weight   => $self->calculate_weight,
         used_volume         => $self->used_volume,
+        fill_volume         => $self->fill_volume,
         volume              => $self->volume,
         layers              => [map { $_->packing_instructions } @{ $self->layers }],
   };
@@ -311,13 +312,13 @@ sub used_volume {
     return sum map { $_->used_volume } @{ $self->layers };
 }
 
-=head2 volume 
+=head2 fill_volume 
 
 Returns the exact volume needed for this box.    
 
 =cut
 
-sub volume {
+sub fill_volume {
     return $_[0]->fill_x * $_[0]->fill_y * $_[0]->fill_z;
 }
 
